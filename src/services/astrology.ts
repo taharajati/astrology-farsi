@@ -37,13 +37,46 @@ const mockAnalysis: Analysis = {
   personality: 'شما فردی خلاق و مستقل هستید که به دنبال بیان فردیت خود می‌گردید. طالع میزان نشان‌دهنده‌ی تعادل و عدالت‌طلبی در شخصیت شماست.',
   relationships: 'در روابط عاطفی، شما فردی وفادار و صادق هستید. با توجه به قرارگیری زهره در برج اسد، عشق و محبت در زندگی شما نقش مهمی دارد.',
   career: 'با توجه به قرارگیری خورشید در خانه پنجم، شما در زمینه‌های خلاقانه و هنری موفق خواهید بود. همچنین با توجه به قرارگیری ماه در خانه دهم، در مسیر شغلی خود پیشرفت خوبی خواهید داشت.',
+  lifePath: 'مسیر زندگی شما با خلاقیت و بیان فردیت گره خورده است. با توجه به قرارگیری خورشید در برج اسد و ماه در برج دلو، شما فردی مستقل و نوآور هستید که می‌تواند در زمینه‌های هنری و خلاقانه موفقیت‌های چشمگیری کسب کند.',
   strengths: ['خلاقیت', 'استقلال', 'عدالت‌طلبی', 'وفاداری'],
-  weaknesses: ['خودرایی', 'حساسیت بیش از حد', 'وسواس در کمال‌طلبی'],
+  challenges: ['خودرایی', 'حساسیت بیش از حد', 'وسواس در کمال‌طلبی', 'مشکل در پذیرش انتقاد'],
   recommendations: [
-    'به دنبال فعالیت‌های خلاقانه باشید',
-    'در تصمیم‌گیری‌ها تعادل را رعایت کنید',
-    'به دیگران فرصت ابراز وجود دهید',
+    {
+      title: 'توسعه مهارت‌های خلاقانه',
+      description: 'با توجه به استعداد ذاتی شما در خلاقیت، پیشنهاد می‌شود در زمینه‌های هنری و خلاقانه فعالیت بیشتری داشته باشید.',
+      priority: 'بالا',
+      timeframe: '3-6 ماه آینده'
+    },
+    {
+      title: 'مدیریت احساسات',
+      description: 'با توجه به حساسیت بالای شما، یادگیری تکنیک‌های مدیریت احساسات می‌تواند به بهبود روابط شما کمک کند.',
+      priority: 'متوسط',
+      timeframe: '1-3 ماه آینده'
+    },
+    {
+      title: 'توسعه روابط اجتماعی',
+      description: 'با توجه به استعداد شما در برقراری ارتباط، پیشنهاد می‌شود در فعالیت‌های گروهی و اجتماعی بیشتر شرکت کنید.',
+      priority: 'پایین',
+      timeframe: '6-12 ماه آینده'
+    }
   ],
+  detailedAnalysis: {
+    planets: [
+      'خورشید در برج اسد نشان‌دهنده‌ی خلاقیت و اعتماد به نفس بالاست',
+      'ماه در برج دلو نشان‌دهنده‌ی استقلال و نوآوری است',
+      'عطارد در برج سنبله نشان‌دهنده‌ی دقت و تحلیل‌گری است'
+    ],
+    houses: [
+      'خانه اول (طالع) در برج میزان نشان‌دهنده‌ی تعادل و عدالت‌طلبی است',
+      'خانه پنجم در برج اسد نشان‌دهنده‌ی خلاقیت و بیان فردیت است',
+      'خانه دهم در برج دلو نشان‌دهنده‌ی استقلال و نوآوری در مسیر شغلی است'
+    ],
+    aspects: [
+      'تریل بین خورشید و ماه نشان‌دهنده‌ی هماهنگی بین هویت و احساسات است',
+      'مربع بین خورشید و عطارد نشان‌دهنده‌ی چالش در بیان افکار است',
+      'مقارنه بین ماه و زهره نشان‌دهنده‌ی عاطفه و احساسات قوی است'
+    ]
+  }
 };
 
 class AstrologyService {
@@ -190,67 +223,233 @@ class AstrologyService {
   }
 
   async generateAnalysis(chartData: ChartData, birthInfo: BirthInfo): Promise<Analysis> {
-    // تولید تحلیل بر اساس چارت تولد
-    const strengths = [
-      'توانایی رهبری و هدایت دیگران',
-      'خلاقیت و نوآوری در کار',
-      'مهارت‌های ارتباطی قوی',
-      'درک عمیق از احساسات دیگران',
-      'استعداد در حل مسائل پیچیده'
-    ];
+    const { ascendant, planets, houses, aspects } = chartData;
     
-    const challenges = [
-      'نیاز به یافتن تعادل بین کار و زندگی شخصی',
-      'مدیریت استرس و فشارهای روزمره',
-      'تصمیم‌گیری در شرایط سخت',
-      'برقراری ارتباط عمیق با دیگران',
-      'پذیرش تغییرات ناگهانی'
-    ];
-    
-    const recommendations: Recommendation[] = [
-      {
-        area: 'شغلی',
-        advice: 'زمان مناسبی برای شروع پروژه‌های جدید است. از خلاقیت خود استفاده کنید.'
-      },
-      {
-        area: 'روابط',
-        advice: 'ارتباطات خود را عمیق‌تر کنید و به نیازهای عاطفی دیگران توجه بیشتری نشان دهید.'
-      },
-      {
-        area: 'سلامتی',
-        advice: 'به استراحت و تمدد اعصاب بیشتر اهمیت دهید. ورزش منظم را در برنامه خود قرار دهید.'
-      }
-    ];
-    
-    const interestAnalysis: { [key: string]: string } = {};
-    birthInfo.interests.forEach(interest => {
-      switch (interest) {
-        case 'عشق و روابط':
-          interestAnalysis[interest] = 'زمان مناسبی برای تقویت روابط عاطفی است. به ندای قلب خود گوش دهید.';
-          break;
-        case 'شغل و حرفه':
-          interestAnalysis[interest] = 'فرصت‌های شغلی جدیدی در راه است. آماده تغییرات مثبت باشید.';
-          break;
-        case 'سلامت و تندرستی':
-          interestAnalysis[interest] = 'توجه به سلامت جسمی و روحی در اولویت قرار دارد.';
-          break;
-        default:
-          interestAnalysis[interest] = 'این حوزه پتانسیل خوبی برای رشد و پیشرفت دارد.';
-      }
-    });
+    // تحلیل شخصیت بر اساس طالع و خورشید
+    const sunPlanet = planets.find(p => p.name === 'خورشید');
+    const moonPlanet = planets.find(p => p.name === 'ماه');
+    const mercuryPlanet = planets.find(p => p.name === 'عطارد');
+    const venusPlanet = planets.find(p => p.name === 'زهره');
+    const marsPlanet = planets.find(p => p.name === 'مریخ');
+
+    const personalityTraits = this.analyzePersonalityTraits(ascendant, sunPlanet, moonPlanet);
+    const emotionalNature = this.analyzeEmotionalNature(moonPlanet, venusPlanet);
+    const communicationStyle = this.analyzeCommunicationStyle(mercuryPlanet);
+    const relationships = this.analyzeRelationships(venusPlanet, marsPlanet, aspects);
+    const careerPotential = this.analyzeCareerPotential(sunPlanet, houses[9], aspects);
+    const lifeDestiny = this.analyzeLifeDestiny(houses, aspects);
     
     return {
-      ascendant: chartData.ascendant,
-      sunSign: chartData.planets.find(p => p.name === 'خورشید')?.sign || 'نامشخص',
-      moonSign: chartData.planets.find(p => p.name === 'ماه')?.sign || 'نامشخص',
-      planets: chartData.planets,
-      houses: chartData.houses,
-      aspects: chartData.aspects,
-      strengths,
-      challenges,
-      recommendations,
-      interestAnalysis
+      personality: `${personalityTraits}\n\n${emotionalNature}\n\n${communicationStyle}`,
+      relationships,
+      career: careerPotential,
+      lifeDestiny,
+      strengths: this.analyzeStrengths(planets, aspects),
+      challenges: this.analyzeChallenges(planets, aspects),
+      recommendations: this.generateRecommendations(chartData),
+      detailedAnalysis: {
+        planets: planets.map(p => p.interpretation),
+        houses: houses.map(h => h.interpretation),
+        aspects: aspects.map(a => a.interpretation)
+      }
     };
+  }
+
+  private analyzePersonalityTraits(ascendant: string, sun: Planet, moon: Planet): string {
+    const traits = {
+      'حمل': 'پرانرژی و پیشگام',
+      'ثور': 'با ثبات و عملگرا',
+      'جوزا': 'کنجکاو و سازگار',
+      'سرطان': 'احساساتی و مراقب',
+      'اسد': 'خلاق و با اعتماد به نفس',
+      'سنبله': 'دقیق و منظم',
+      'میزان': 'دیپلمات و عادل',
+      'عقرب': 'عمیق و مرموز',
+      'قوس': 'ماجراجو و خوش‌بین',
+      'جدی': 'مسئول و جاه‌طلب',
+      'دلو': 'مستقل و نوآور',
+      'حوت': 'شهودی و همدل'
+    };
+
+    return `شخصیت شما ترکیبی پویا از سه عنصر کلیدی است:
+    
+۱. طالع ${ascendant} شما که نشان‌دهنده ${traits[ascendant]} بودن شماست و در نحوه برخورد اولیه دیگران با شما تأثیر می‌گذارد.
+
+۲. خورشید در ${sun.sign} که نشان‌دهنده جوهره اصلی شخصیت شماست و بیانگر ${traits[sun.sign]} بودن ذات شماست.
+
+۳. ماه در ${moon.sign} که نمایانگر احساسات درونی شما و نشان‌دهنده ${traits[moon.sign]} بودن در لایه‌های عمیق‌تر شخصیتی شماست.
+
+این ترکیب منحصر به فرد باعث می‌شود که شما فردی ${traits[ascendant]}، با ذاتی ${traits[sun.sign]} و احساساتی ${traits[moon.sign]} باشید.`;
+  }
+
+  private analyzeEmotionalNature(moon: Planet, venus: Planet): string {
+    return `در زمینه احساسات و عواطف:
+
+۱. ماه در ${moon.sign} و خانه ${moon.house} نشان می‌دهد که شما در لایه عمیق احساسی خود ${moon.interpretation}
+
+۲. زهره در ${venus.sign} و خانه ${venus.house} بیانگر این است که در روابط عاطفی ${venus.interpretation}
+
+این ترکیب نشان می‌دهد که شما در روابط عاطفی به دنبال امنیت و درک متقابل هستید، و توانایی خاصی در درک احساسات دیگران دارید.`;
+  }
+
+  private analyzeCommunicationStyle(mercury: Planet): string {
+    const styles = {
+      'حمل': 'مستقیم و رک',
+      'ثور': 'آرام و متفکر',
+      'جوزا': 'پویا و انعطاف‌پذیر',
+      'سرطان': 'همدلانه و حساس',
+      'اسد': 'گرم و تأثیرگذار',
+      'سنبله': 'تحلیلی و دقیق',
+      'میزان': 'دیپلماتیک و متعادل',
+      'عقرب': 'نافذ و عمیق',
+      'قوس': 'صریح و فلسفی',
+      'جدی': 'ساختارمند و جدی',
+      'دلو': 'خلاقانه و نوآورانه',
+      'حوت': 'شهودی و هنری'
+    };
+
+    return `در زمینه ارتباطات و تفکر:
+
+عطارد در ${mercury.sign} و خانه ${mercury.house} نشان می‌دهد که سبک ارتباطی شما ${styles[mercury.sign]} است.
+${mercury.interpretation}
+
+این موقعیت نشان می‌دهد که شما در برقراری ارتباط و انتقال افکار خود توانایی خاصی دارید و می‌توانید به خوبی با دیگران تعامل کنید.`;
+  }
+
+  private analyzeRelationships(venus: Planet, mars: Planet, aspects: Aspect[]): string {
+    const venusAspects = aspects.filter(a => a.planet1 === 'زهره' || a.planet2 === 'زهره');
+    const marsAspects = aspects.filter(a => a.planet1 === 'مریخ' || a.planet2 === 'مریخ');
+
+    return `در زمینه روابط و عشق:
+
+۱. زهره در ${venus.sign} نشان می‌دهد که شما در روابط عاطفی ${venus.interpretation}
+
+۲. مریخ در ${mars.sign} بیانگر این است که در ابراز عشق و جذب دیگران ${mars.interpretation}
+
+${venusAspects.map(a => a.interpretation).join('\n')}
+
+${marsAspects.map(a => a.interpretation).join('\n')}
+
+این ترکیب نشان می‌دهد که شما در روابط به دنبال تعادل بین عشق و استقلال هستید.`;
+  }
+
+  private analyzeCareerPotential(sun: Planet, tenthHouse: House, aspects: Aspect[]): string {
+    const careerAspects = aspects.filter(a => 
+      (a.planet1 === 'خورشید' || a.planet2 === 'خورشید') ||
+      (a.planet1 === 'زحل' || a.planet2 === 'زحل')
+    );
+
+    return `در زمینه شغل و حرفه:
+
+۱. خورشید در ${sun.sign} و خانه ${sun.house} نشان می‌دهد که مسیر شغلی شما ${sun.interpretation}
+
+۲. خانه دهم در ${tenthHouse.sign} با حاکمیت ${tenthHouse.ruler} نشان‌دهنده ${tenthHouse.interpretation}
+
+${careerAspects.map(a => a.interpretation).join('\n')}
+
+این ترکیب نشان می‌دهد که شما استعداد خاصی در زمینه‌های [حوزه‌های کاری مرتبط] دارید و می‌توانید در این مسیرها موفق شوید.`;
+  }
+
+  private analyzeLifeDestiny(houses: House[], aspects: Aspect[]): string {
+    const ninthHouse = houses[8]; // خانه نهم - فلسفه و معنا
+    const twelfthHouse = houses[11]; // خانه دوازدهم - معنویت
+    
+    return `در زمینه مسیر زندگی و سرنوشت:
+
+۱. خانه نهم در ${ninthHouse.sign} نشان می‌دهد که ${ninthHouse.interpretation}
+
+۲. خانه دوازدهم در ${twelfthHouse.sign} بیانگر این است که ${twelfthHouse.interpretation}
+
+این ترکیب نشان می‌دهد که مسیر زندگی شما به سمت [جهت‌گیری کلی زندگی] است و می‌توانید در این مسیر به رشد و تعالی برسید.`;
+  }
+
+  private analyzeStrengths(planets: Planet[], aspects: Aspect[]): string[] {
+    const strengths = new Set<string>();
+    
+    // تحلیل قوت‌ها بر اساس موقعیت سیارات
+    planets.forEach(planet => {
+      if (planet.house === 1 || planet.house === 10) {
+        strengths.add(`توانایی رهبری و هدایت در زمینه ${planet.name}`);
+      }
+      if (planet.house === 2 || planet.house === 8) {
+        strengths.add(`استعداد در مدیریت منابع و دارایی‌ها`);
+      }
+      if (planet.house === 3 || planet.house === 9) {
+        strengths.add(`توانایی یادگیری و درک عمیق مفاهیم`);
+      }
+    });
+
+    // تحلیل قوت‌ها بر اساس جنبه‌های مثبت
+    aspects.forEach(aspect => {
+      if (aspect.type === 'مثلث' || aspect.type === 'تسدیس') {
+        strengths.add(`هماهنگی بین ${aspect.planet1} و ${aspect.planet2}`);
+      }
+    });
+
+    return Array.from(strengths);
+  }
+
+  private analyzeChallenges(planets: Planet[], aspects: Aspect[]): string[] {
+    const challenges = new Set<string>();
+    
+    // تحلیل چالش‌ها بر اساس موقعیت سیارات
+    planets.forEach(planet => {
+      if (planet.house === 12 || planet.house === 6) {
+        challenges.add(`نیاز به توجه بیشتر به سلامتی و تعادل در زمینه ${planet.name}`);
+      }
+      if (planet.house === 8) {
+        challenges.add(`چالش‌های تحول و تغییر در زمینه ${planet.name}`);
+      }
+    });
+
+    // تحلیل چالش‌ها بر اساس جنبه‌های سخت
+    aspects.forEach(aspect => {
+      if (aspect.type === 'مربع' || aspect.type === 'مقابله') {
+        challenges.add(`تنش بین ${aspect.planet1} و ${aspect.planet2}`);
+      }
+    });
+
+    return Array.from(challenges);
+  }
+
+  private generateRecommendations(chartData: ChartData): Recommendation[] {
+    const { planets, houses, aspects } = chartData;
+    const recommendations: Recommendation[] = [];
+
+    // توصیه‌های کلی بر اساس موقعیت سیارات
+    planets.forEach(planet => {
+      if (planet.house === 1 || planet.house === 10) {
+        recommendations.push({
+          area: 'شخصی',
+          suggestion: `تقویت جنبه‌های رهبری و مدیریتی در زمینه ${planet.name}`,
+          priority: 'بالا'
+        });
+      }
+    });
+
+    // توصیه‌های مرتبط با خانه‌ها
+    houses.forEach(house => {
+      if (house.number === 6) {
+        recommendations.push({
+          area: 'سلامتی',
+          suggestion: 'توجه بیشتر به سلامت جسمی و روانی',
+          priority: 'متوسط'
+        });
+      }
+    });
+
+    // توصیه‌های مرتبط با جنبه‌ها
+    aspects.forEach(aspect => {
+      if (aspect.type === 'مربع') {
+        recommendations.push({
+          area: 'چالش‌ها',
+          suggestion: `کار روی تعادل بین ${aspect.planet1} و ${aspect.planet2}`,
+          priority: 'بالا'
+        });
+      }
+    });
+
+    return recommendations;
   }
 }
 

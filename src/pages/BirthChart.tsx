@@ -5,6 +5,7 @@ import { astrologyService } from '../services/astrology';
 import { BirthInfo, ChartData, Analysis, UserProfile } from '../types';
 import { convertPersianToGregorian, isValidPersianDate, formatPersianDateWithDash } from '../utils/dateUtils';
 import CitySelector from '../components/CitySelector';
+import { Link } from 'react-router-dom';
 
 const BirthChart = () => {
   const navigate = useNavigate();
@@ -141,12 +142,10 @@ const BirthChart = () => {
   
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="card shadow-xl shadow-purple-900/20">
+      <div className="card">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            محاسبه طالع تولد
-          </h1>
-          <p className="text-center text-purple-200">
+          <h1 className="section-title">محاسبه طالع تولد</h1>
+          <p className="section-subtitle">
             اطلاعات تولد خود را وارد کنید تا طالع شخصی شما محاسبه شود
           </p>
         </div>
@@ -264,7 +263,7 @@ const BirthChart = () => {
           <div className="space-y-6">
             <h3 className="text-xl font-medium text-purple-200">تایید اطلاعات</h3>
             
-            <div className="bg-purple-900/30 p-4 rounded-lg space-y-3">
+            <div className="astro-card space-y-3">
               <div>
                 <span className="text-purple-300">نام:</span>
                 <span className="text-white mr-2">{formData.name}</span>
@@ -286,7 +285,7 @@ const BirthChart = () => {
                 <span className="text-purple-300">حوزه‌های مورد علاقه:</span>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {formData.interests?.map((interest) => (
-                    <span key={interest} className="px-2 py-1 bg-purple-800/50 rounded text-sm">
+                    <span key={interest} className="badge bg-purple-900/50 text-purple-200 border border-purple-500/30">
                       {interest}
                     </span>
                   ))}
@@ -306,7 +305,7 @@ const BirthChart = () => {
           {step > 1 && (
             <button
               onClick={handleBack}
-              className="px-6 py-2 rounded-lg bg-purple-900/50 text-purple-200 hover:bg-purple-800/50 transition-colors"
+              className="btn-secondary"
               disabled={loading}
             >
               بازگشت
@@ -315,11 +314,11 @@ const BirthChart = () => {
           
           <button
             onClick={handleNext}
-            className={`px-6 py-2 rounded-lg ${
+            className={`${
               loading 
                 ? 'bg-purple-700 cursor-not-allowed' 
-                : 'bg-purple-600 hover:bg-purple-700'
-            } text-white transition-colors flex items-center`}
+                : 'btn-primary'
+            } flex items-center`}
             disabled={loading}
           >
             {loading ? (
@@ -339,15 +338,187 @@ const BirthChart = () => {
         </div>
         
         {chartData && (
-          <div className="mt-8 p-4 bg-purple-900/30 rounded-lg">
-            <h2 className="text-xl font-bold text-purple-200">جزئیات چارت تولد</h2>
-            <p className="text-purple-300">چارت تولد شما نشان‌دهنده موقعیت سیارات و خانه‌ها در زمان تولد شماست.</p>
-            <h3 className="text-lg font-semibold text-purple-200 mt-4">سیارات و خانه‌ها</h3>
-            <p className="text-purple-300">هر سیاره و خانه در چارت شما معنای خاصی دارد و تأثیرات متفاوتی بر زندگی شما می‌گذارد.</p>
-            <h3 className="text-lg font-semibold text-purple-200 mt-4">توصیه‌ها</h3>
-            <p className="text-purple-300">بر اساس چارت شما، پیشنهاد می‌شود که به دنبال تعادل در زندگی خود باشید و از فرصت‌های جدید استقبال کنید.</p>
-            <h3 className="text-lg font-semibold text-purple-200 mt-4">منابع بیشتر</h3>
-            <p className="text-purple-300">برای اطلاعات بیشتر، می‌توانید به کتاب‌ها و منابع آموزشی مرتبط با طالع‌بینى مراجعه کنید.</p>
+          <div className="mt-8">
+            <div className="card mb-8">
+              <h2 className="section-title">جزئیات چارت تولد</h2>
+              <p className="section-subtitle mb-6">چارت تولد شما نشان‌دهنده موقعیت سیارات و خانه‌ها در زمان تولد شماست.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="astro-card p-4 text-center">
+                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-1">طالع صعودی</h3>
+                  <p className="text-purple-300">{chartData.ascendant}</p>
+                </div>
+                
+                <div className="astro-card p-4 text-center">
+                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-1">خورشید</h3>
+                  <p className="text-purple-300">{chartData.planets.find(p => p.name === 'خورشید')?.sign || 'نامشخص'}</p>
+                </div>
+                
+                <div className="astro-card p-4 text-center">
+                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-1">ماه</h3>
+                  <p className="text-purple-300">{chartData.planets.find(p => p.name === 'ماه')?.sign || 'نامشخص'}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="card mb-8">
+              <h2 className="section-title">سیارات و خانه‌ها</h2>
+              <p className="section-subtitle mb-6">موقعیت سیارات و خانه‌ها در چارت تولد شما</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="astro-card">
+                  <h3 className="text-lg font-semibold text-purple-200 mb-3 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    سیارات
+                  </h3>
+                  <div className="space-y-2">
+                    {chartData.planets.map((planet, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 rounded-lg bg-purple-900/30 hover:bg-purple-800/30 transition-colors">
+                        <div className="flex items-center">
+                          <span className="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-sm text-white mr-3">
+                            {index + 1}
+                          </span>
+                          <span className="text-purple-200 font-medium">{planet.name}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-purple-300 block">{planet.sign}</span>
+                          <span className="text-xs text-purple-400">خانه {planet.house}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="astro-card">
+                  <h3 className="text-lg font-semibold text-purple-200 mb-3 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    خانه‌ها
+                  </h3>
+                  <div className="space-y-2">
+                    {chartData.houses.map((house, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 rounded-lg bg-purple-900/30 hover:bg-purple-800/30 transition-colors">
+                        <div className="flex items-center">
+                          <span className="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-sm text-white mr-3">
+                            {house.number}
+                          </span>
+                          <span className="text-purple-200 font-medium">خانه {house.number}</span>
+                        </div>
+                        <span className="text-purple-300">{house.sign}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="card mb-8">
+              <h2 className="section-title">جنبه‌های مهم</h2>
+              <p className="section-subtitle mb-6">ارتباطات بین سیارات در چارت تولد شما</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {chartData.aspects.map((aspect, index) => (
+                  <div key={index} className="astro-card p-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <div className="flex items-center">
+                        <span className="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-sm text-white mr-3">
+                          {index + 1}
+                        </span>
+                        <span className="text-purple-200 font-medium">{aspect.planet1} - {aspect.planet2}</span>
+                      </div>
+                      <span className={`badge ${
+                        aspect.type.includes('مثلث') ? 'bg-green-900/50 text-green-200 border-green-500/30' :
+                        aspect.type.includes('مربع') ? 'bg-red-900/50 text-red-200 border-red-500/30' :
+                        aspect.type.includes('مقابل') ? 'bg-yellow-900/50 text-yellow-200 border-yellow-500/30' :
+                        'bg-purple-900/50 text-purple-200 border-purple-500/30'
+                      }`}>
+                        {aspect.type}
+                      </span>
+                    </div>
+                    <p className="text-purple-300 text-sm">{aspect.interpretation}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="card">
+              <h2 className="section-title">توصیه‌های شخصی</h2>
+              <p className="section-subtitle mb-6">بر اساس چارت شما، پیشنهاد می‌شود که:</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="astro-card p-4">
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-3">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">روابط</h3>
+                  <p className="text-purple-300">در روابط خود صادق و وفادار باشید و به احساسات دیگران احترام بگذارید.</p>
+                </div>
+                
+                <div className="astro-card p-4">
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-3">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">شغل</h3>
+                  <p className="text-purple-300">برای پیشرفت شغلی، مهارت‌های خود را توسعه دهید و فرصت‌های جدید را امتحان کنید.</p>
+                </div>
+                
+                <div className="astro-card p-4">
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-3">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">سلامت</h3>
+                  <p className="text-purple-300">به سلامت جسمی و روحی خود توجه کنید و از استرس‌های غیرضروری دوری کنید.</p>
+                </div>
+              </div>
+              
+              <div className="astro-card p-4 mb-6">
+                <h3 className="text-lg font-semibold text-purple-200 mb-3">توصیه‌های کلی</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-purple-400 ml-2">•</span>
+                    <span className="text-purple-300">به دنبال تعادل در زندگی خود باشید و از فرصت‌های جدید استقبال کنید.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-400 ml-2">•</span>
+                    <span className="text-purple-300">در تصمیم‌گیری‌های مهم، به شهود خود اعتماد کنید.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-400 ml-2">•</span>
+                    <span className="text-purple-300">برای رشد شخصی، به مطالعه و یادگیری ادامه دهید.</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="text-center">
+                <Link to="/profile" className="btn-primary text-lg px-8 py-3">
+                  مشاهده تحلیل کامل
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </div>

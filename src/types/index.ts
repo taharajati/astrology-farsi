@@ -12,47 +12,53 @@ export interface Planet {
   sign: string;
   house: number;
   degree: number;
-  interpretation: string;
+  isRetrograde: boolean;
 }
 
 export interface House {
   number: number;
   sign: string;
-  ruler: string;
-  interpretation: string;
+  degree: number;
 }
 
 export interface Aspect {
   planet1: string;
   planet2: string;
   type: string;
-  orb: number;
-  interpretation: string;
+  degree: number;
+}
+
+export interface Recommendation {
+  title: string;
+  description: string;
+  priority: string;
+  timeframe?: string;
+}
+
+export interface DetailedAnalysis {
+  planets: string[];
+  houses: string[];
+  aspects: string[];
 }
 
 export interface ChartData {
+  sunSign: string;
+  moonSign: string;
   ascendant: string;
-  houses: House[];
   planets: Planet[];
+  houses: House[];
   aspects: Aspect[];
 }
 
 export interface Analysis {
-  ascendant: string;
-  sunSign: string;
-  moonSign: string;
-  planets: Planet[];
-  houses: House[];
-  aspects: Aspect[];
+  personality: string;
+  relationships: string;
+  career: string;
+  lifePath: string;
   strengths: string[];
   challenges: string[];
   recommendations: Recommendation[];
-  interestAnalysis: { [key: string]: string };
-}
-
-export interface Recommendation {
-  area: string;
-  advice: string;
+  detailedAnalysis: DetailedAnalysis;
 }
 
 export interface UserProfile {

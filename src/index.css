@@ -11,19 +11,61 @@
   
   body {
     @apply bg-black text-white;
+    background-image: radial-gradient(circle at 50% 50%, rgba(88, 28, 135, 0.15) 0%, rgba(0, 0, 0, 0.8) 100%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors;
+    @apply px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg shadow-purple-500/20;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-2 rounded-lg bg-purple-900/50 text-purple-200 hover:bg-purple-800/50 transition-colors;
   }
   
   .input-primary {
-    @apply w-full px-4 py-2 rounded-lg bg-purple-900/30 border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500;
+    @apply w-full px-4 py-2 rounded-lg bg-purple-900/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/70 transition-all;
   }
   
   .card {
-    @apply bg-purple-900/30 p-6 rounded-lg;
+    @apply bg-purple-900/30 p-6 rounded-lg shadow-xl shadow-purple-900/20 backdrop-blur-sm;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .section-subtitle {
+    @apply text-center text-purple-200 mt-2 mb-6;
+  }
+
+  .badge {
+    @apply px-2 py-1 text-sm rounded-full;
+  }
+
+  .badge-high {
+    @apply bg-red-900/50 text-red-200 border border-red-500/30;
+  }
+
+  .badge-medium {
+    @apply bg-yellow-900/50 text-yellow-200 border border-yellow-500/30;
+  }
+
+  .badge-low {
+    @apply bg-green-900/50 text-green-200 border border-green-500/30;
+  }
+
+  .grid-cols-astro {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+  }
+
+  .astro-card {
+    @apply bg-white/10 backdrop-blur-md rounded-lg p-4 border border-purple-500/20 hover:border-purple-500/40 transition-all;
   }
 }

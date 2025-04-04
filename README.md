@@ -1,63 +1,64 @@
-# ستاره‌شناسی - Astrology Website
+# Astrology App
 
-یک وب‌سایت برای تولید و تحلیل چارت تولد با استفاده از دانش ستاره‌شناسی و هوش مصنوعی.
+A modern astrology application built with React and TypeScript that provides detailed birth chart analysis and personalized astrological insights.
 
-## ویژگی‌ها
+## Features
 
-- تولید چارت تولد دقیق با استفاده از تاریخ، ساعت و مکان تولد
-- تحلیل شخصیت با استفاده از هوش مصنوعی
-- رابط کاربری زیبا و واکنش‌گرا
-- پشتیبانی از تاریخ شمسی
-- ذخیره و مدیریت پروفایل‌های نجومی
+- Birth chart calculation
+- Detailed astrological analysis
+- Personalized recommendations
+- Persian and Gregorian calendar support
+- Responsive design
+- Dark theme
 
-## نیازمندی‌ها
+## Tech Stack
 
-- Node.js (نسخه 18 یا بالاتر)
-- npm (نسخه 9 یا بالاتر)
+- React
+- TypeScript
+- Tailwind CSS
+- React Router
+- Context API for state management
 
-## نصب و راه‌اندازی
+## Getting Started
 
-1. کلون کردن پروژه:
+1. Clone the repository:
 ```bash
-git clone [repository-url]
-cd astro
+git clone https://github.com/yourusername/astrology-app.git
 ```
 
-2. نصب وابستگی‌ها:
+2. Install dependencies:
 ```bash
+cd astrology-app
 npm install
 ```
 
-3. اجرای پروژه در محیط توسعه:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. ساخت نسخه تولید:
-```bash
-npm run build
-```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## ساختار پروژه
+## Project Structure
 
 ```
 src/
-  ├── components/     # کامپوننت‌های قابل استفاده مجدد
-  ├── pages/         # صفحات اصلی برنامه
-  ├── services/      # سرویس‌های API و محاسبات نجومی
-  ├── types/         # تعاریف TypeScript
-  └── utils/         # توابع کمکی
+  ├── components/     # Reusable UI components
+  ├── context/       # Context providers
+  ├── pages/         # Page components
+  ├── services/      # API and business logic
+  ├── types/         # TypeScript type definitions
+  └── utils/         # Utility functions
 ```
 
-## تکنولوژی‌های استفاده شده
+## Contributing
 
-- React + TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- OpenAI API
-- Swiss Ephemeris
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## مجوز
+## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
